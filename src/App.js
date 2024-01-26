@@ -8,25 +8,26 @@ export default function App() {
 
   const SubmitHandler = (e) => {
     e.preventDefault();
+
     // Check if both first and last names are filled before submitting
-    if (first.trim() !== "" && last.trim() !== "") {
+    if (first !== "" || last !== "") {
       setIsSubmitted(true);
     }
   };
 
   return (
     <div>
-      <form>
+      <form onSubmit={SubmitHandler}>
         <h1>Full Name Display</h1>
 
         <div>
-          Full Name <input type="text" onChange={(e) => setFirst(e.target.value)} />
+          Full Name <input type="text" value={first} onChange={(e) => setFirst(e.target.value)} />
         </div>
         <div>
-          Last Name <input type="text" onChange={(e) => setLast(e.target.value)} />
+          Last Name <input type="text" value={last} onChange={(e) => setLast(e.target.value)} />
         </div>
 
-        <button type="submit" onClick={SubmitHandler} disabled={!first.trim() || !last.trim()}>
+        <button type="submit" >
           Submit
         </button>
       </form>
