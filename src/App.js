@@ -14,9 +14,7 @@ export default function App() {
     if (first.trim() !== "" && last.trim() !== "") {
       setIsSubmitted(true);
       setErrorMessage("");
-    } else {
-      setErrorMessage("Please fill in both first and last names.");
-    }
+    } 
   };
 
   return (
