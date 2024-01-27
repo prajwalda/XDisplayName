@@ -5,19 +5,23 @@ export default function App() {
   const [first, setFirst] = useState("");
   const [last, setLast] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
-  const SubmitHandler = (e) => {
+  const submitHandler = (e) => {
     e.preventDefault();
 
     // Check if both first and last names are filled before submitting
-    if (first !== "" || last !== "") {
+    if (first.trim() !== "" && last.trim() !== "") {
       setIsSubmitted(true);
+      setErrorMessage("");
+    } else {
+      setErrorMessage("Please fill in both first and last names.");
     }
   };
 
   return (
     <div>
-      <form onSubmit={SubmitHandler}>
+      <form onSubmit={submitHandler}>
         <h1>Full Name Display</h1>
 
         <div>
@@ -27,15 +31,15 @@ export default function App() {
           Last Name <input type="text" value={last} onChange={(e) => setLast(e.target.value)} />
         </div>
 
-        <button type="submit" >
-          Submit
-        </button>
+        <button type="submit">Submit</button>
       </form>
 
-      {isSubmitted ? (
-        <div>{`Full Name: ${first} ${last}`}</div>
-      ) : (
-        <div>Please fill in both first and last names before submitting.</div>
+      {errorMessage && <div style={{ color: "red" }}>{errorMessage}</div>}
+
+      {isSubmitted && (
+        <div>
+          Full Name: {first} {last}
+        </div>
       )}
     </div>
   );
